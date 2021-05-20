@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/marcio-frainer/node-dump-poc/issues"
   },
-  "homepage": "https://github.com/marcio-frainer/node-dump-poc#readme"
+  "homepage": "https://github.com/marcio-frainer/node-dump-poc#readme",
+  "dependencies": {
+    "mssql": "^7.1.0",
+    "pg": "^8.6.0"
+  }
 }
