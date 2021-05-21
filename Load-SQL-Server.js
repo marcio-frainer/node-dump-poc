@@ -1,9 +1,6 @@
-const sql = require('mssql');
 
-//
-// buscar as informações das tabelas de usuário pertencentes ao schema SAJ
-//
-const QUERY_OBJECTS = 'select top 10 o.name from sys.objects o where o.type = \'u\' and o.schema_id = 9';
+const Tables = require('./Load-Tables');
+const Columns = require('./Load-Columns');
 
 //
 // Usuário de acesso ao banco de dados
@@ -45,17 +42,19 @@ const SQL_CONFIG = {
 };
 
 //
-// Método para buscar
+// Após receber as tabelas do sistema temos que pegar a estrutura dessas tabelas e replicar
+// na base do postgres
+// tipos de objetos utilizado no sqlserver (objects)
+// F - Foreign key, Pk - Primary key
 //
-async function connect() {
-  try {
-    await sql.connect(SQL_CONFIG);
-    return await sql.query(QUERY_OBJECTS);
-  } catch (err) {
-    console.log(`Connect failed: ${err}`)
-  }
-};
 
-const tables = connect();
+Tables(SQL_CONFIG).then( result => {
+  result.recordset.forEach(table => {
+    Columns(SQL_CONFIG, table.name).then( element => {
+      console.log(JSON.stringify(element));
+    });
+  })
+  // console.log(JSON.stringify(result.recordset))
+});
 
 
