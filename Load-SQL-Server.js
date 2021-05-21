@@ -28,7 +28,7 @@ const DB_URL = process.env.$NIMITZ_DB_URL;
 //
 // configuração de um modelo de banco de dados
 //
-const sqlConfig = {
+const SQL_CONFIG = {
   user: DB_USERNAME,
   password: DB_PASSWORD,
   database: DB_NAME,
@@ -44,15 +44,18 @@ const sqlConfig = {
   }
 };
 
+//
+// Método para buscar
+//
 async function connect() {
   try {
-    // make sure that any items are correctly URL encoded in the connection string
-    await sql.connect(sqlConfig);
-    const result = await sql.query(QUERY_OBJECTS);
-    console.log(`recordset: ${JSON.stringify(result.recordset)}`);
+    await sql.connect(SQL_CONFIG);
+    return await sql.query(QUERY_OBJECTS);
   } catch (err) {
     console.log(`Connect failed: ${err}`)
   }
 };
 
-connect();
+const tables = connect();
+
+
