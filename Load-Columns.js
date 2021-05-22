@@ -1,7 +1,7 @@
 const sql = require('mssql');
 
 //
-// buscar as informações das colunas da tabela pertencentes ao schema SAJ
+// buscar as informaÃ§Ãµes das colunas da tabela pertencentes ao schema SAJ
 //
 const QUERY_COLUMNS =
  `select o.name tableName,

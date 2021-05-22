@@ -1,7 +1,7 @@
 const sql = require('mssql');
 
 //
-// buscar as informações das tabelas de usuário pertencentes ao schema SAJ
+// buscar as informaÃ§Ãµes das tabelas de usuÃ¡rio pertencentes ao schema SAJ
 //
 const QUERY_OBJECTS = 'select top 10 o.name from sys.objects o where o.type = \'u\' and o.schema_id = 9';
 
